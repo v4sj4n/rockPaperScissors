@@ -6,6 +6,7 @@
 
 main{
     text-align: center;
+    display: none;
 }
 
 main > h1{
@@ -19,4 +20,27 @@ font-family: sans-serif;
     border-radius: 1rem;
     width: 7.5rem;
     padding: 1rem;
+}
+
+#winner-text{
+    display: none;
+}
+
+input[type="text"]{
+    display: block;
+    text-align: center;
+}
+
+
+#opening-container{
+    display: flex;
+    flex-direction: column ;
+    align-items: center;
+}
+#input-container{
+    display: flex;
+    gap: 10px
+}
+#input-container > input[type="button"]{
+    padding: 0.5rem 2rem;
 }

@@ -1,12 +1,54 @@
+const name = document.getElementById('name')
+const nameSubmitter = document.getElementById('name-submitter')
+
+const userName = document.getElementById('user-name')
+
+function submitName() {
+    userName.textContent = name.value;
+    name.value = ''; // Clear the input field
+    document.getElementById('opening-container').style.display = 'none';
+    document.querySelector('main').style.display = 'block';
+}
+
+nameSubmitter.addEventListener('click', submitName);
+
+name.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        submitName();
+    }
+});
+
+
+const rockbtn = document.getElementById('rock-button')
+const paperbtn = document.getElementById('paper-button')
+const scissorsbtn = document.getElementById('scissors-button')
+const winnerText = document.getElementById('winner-text')
+
+const compScore = document.getElementById('computer-score')
+const userScore = document.getElementById('user-score')
+
+
+
 const choices = ["rock", "paper", "scissors"];
 
+
+function scoreChecker() {
+    if (Number(compScore.textContent) >= 5 || Number(userScore.textContent >= 5)) {
+        compScore.textContent = 0
+        userScore.textContent = 0
+
+        winnerText.textContent = "The winner is"
+        winnerText.style.display = 'none'
+
+    }
+}
 function getComputerChoice() {
     const computerChoiceIndex = Math.floor(Math.random() * 3);
     return choices[computerChoiceIndex];
 }
 
-function singleGame(user, computer) {
-    //   console.log(`User choice: ${user}\nComputer choice: ${computer}`);
+function gameLogic(user, computer) {
+    console.log(`User choice: ${user}\nComputer choice: ${computer}`);
     if (user === "rock") {
         if (computer === "rock") {
             return 0.5;
@@ -31,27 +73,39 @@ function singleGame(user, computer) {
         } else {
             return 0.5;
         }
+    }
+}
+
+function scoreAdder(value) {
+    if (value == 1) {
+        userScore.textContent = Number(userScore.textContent) + 1
+    }
+    else if (value == 0.5) {
+        userScore.textContent = Number(userScore.textContent) + 0.5
+        compScore.textContent = Number(compScore.textContent) + 0.5
     } else {
-        return `Please enter a value from this list ${choices}`;
+        compScore.textContent = Number(compScore.textContent) + 1
+
+    }
+    if (userScore.textContent >= 5){
+        winnerText.textContent += ` ${userName.textContent}`
+        winnerText.style.display = 'block'
+    }
+    else if(compScore.textContent >= 5){
+        winnerText.textContent += " Computer"
+        winnerText.style.display = 'block'
     }
 }
 
-function game(func) {
-    let comp = 0;
-    let usr = 0;
-    while (comp !== 5 || usr !== 5) {
-        let userChoice = prompt(`Please enter a value`);
-        let res = func(userChoice, getComputerChoice());
-        if (res === 0) {
-            comp++;
-        } else if (res === 1) {
-            usr++;
-        } else if (res === 0.5) {
-            comp += 0.5
-            usr += 0.5
-        }
-    }
-    alert(`Computer ${comp} : ${usr} User`);
+function playGame(value) {
+    scoreChecker()
+    const computerChoice = getComputerChoice()
+    const userValue = gameLogic(value, computerChoice)
+    scoreAdder(userValue)
+    
 }
 
-game(prompt("how many rounds would you like to play"), singleGame);
+
+rockbtn.addEventListener('click', () => playGame("rock"))
+paperbtn.addEventListener('click', () => playGame("paper"))
+scissorsbtn.addEventListener('click', () => playGame("scissors"))
