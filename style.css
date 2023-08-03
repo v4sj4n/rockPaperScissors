@@ -1,0 +1,22 @@
+*{
+    box-sizing: border-box;
+    color-scheme: dark;
+
+}
+
+main{
+    text-align: center;
+}
+
+main > h1{
+font-size: 3rem;
+font-family: sans-serif;
+}
+
+#buttons button{
+    background-color: rgb(64, 169, 120);
+    font-family: sans-serif;
+    border-radius: 1rem;
+    width: 7.5rem;
+    padding: 1rem;
+}

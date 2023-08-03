@@ -36,10 +36,10 @@ function singleGame(user, computer) {
     }
 }
 
-function game(rounds, func) {
+function game(func) {
     let comp = 0;
     let usr = 0;
-    for (let i = 0; i < rounds; i++) {
+    while (comp !== 5 || usr !== 5) {
         let userChoice = prompt(`Please enter a value`);
         let res = func(userChoice, getComputerChoice());
         if (res === 0) {
