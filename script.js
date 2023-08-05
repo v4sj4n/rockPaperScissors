@@ -4,7 +4,7 @@ const nameSubmitter = document.getElementById('name-submitter')
 const userName = document.getElementById('user-name')
 
 function submitName() {
-    if (name.value = "") {
+    if (name.value == "") {
         userName.textContent = "Anon User"
     } else {
         userName.textContent = name.value;
@@ -38,7 +38,7 @@ const choices = ["rock", "paper", "scissors"];
 
 
 function scoreChecker() {
-    if (Number(compScore.textContent) >= 5 || Number(userScore.textContent >= 5)) {
+    if ((compScore.textContent >= 5 || userScore.textContent >= 5) && compScore.textContent != userScore.textContent) {
         compScore.textContent = 0
         userScore.textContent = 0
 
@@ -92,13 +92,16 @@ function scoreAdder(value) {
         compScore.textContent = Number(compScore.textContent) + 1
 
     }
-    if (userScore.textContent >= 5){
-        winnerText.textContent += ` ${userName.textContent}`
-        winnerText.style.display = 'block'
-    }
-    else if(compScore.textContent >= 5){
-        winnerText.textContent += " Computer"
-        winnerText.style.display = 'block'
+    if ((userScore.textContent >= 5 || compScore.textContent >= 5) && userScore.textContent != compScore.textContent){
+        if (userScore.textContent >= compScore.textContent) {
+            winnerText.textContent += ` ${userName.textContent}`
+            winnerText.style.display = 'block'
+        } else{
+            winnerText.textContent += " Computer"
+            winnerText.style.display = 'block'
+
+        }
+
     }
 }
 
