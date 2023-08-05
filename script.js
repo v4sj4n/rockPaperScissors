@@ -4,7 +4,12 @@ const nameSubmitter = document.getElementById('name-submitter')
 const userName = document.getElementById('user-name')
 
 function submitName() {
-    userName.textContent = name.value;
+    if (name.value = "") {
+        userName.textContent = "Anon User"
+    } else {
+        userName.textContent = name.value;
+    }
+    
     name.value = ''; // Clear the input field
     document.getElementById('opening-container').style.display = 'none';
     document.querySelector('main').style.display = 'block';
