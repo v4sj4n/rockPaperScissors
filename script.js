@@ -8,14 +8,21 @@ function submitName() {
         userName.textContent = "Anon User"
     } else {
         userName.textContent = name.value;
+        localStorage.setItem("name", name.value)
     }
-    
-    name.value = ''; // Clear the input field
+
+    name.value = '';
     document.getElementById('opening-container').style.display = 'none';
     document.querySelector('main').style.display = 'block';
 }
 
-nameSubmitter.addEventListener('click', submitName);
+if (!localStorage.getItem("name")) {
+    nameSubmitter.addEventListener('click', submitName);
+} else {
+    userName.textContent = localStorage.getItem("name")
+    document.getElementById('opening-container').style.display = 'none';
+    document.querySelector('main').style.display = 'block';
+}
 
 name.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
@@ -92,11 +99,11 @@ function scoreAdder(value) {
         compScore.textContent = Number(compScore.textContent) + 1
 
     }
-    if ((userScore.textContent >= 5 || compScore.textContent >= 5) && userScore.textContent != compScore.textContent){
+    if ((userScore.textContent >= 5 || compScore.textContent >= 5) && userScore.textContent != compScore.textContent) {
         if (userScore.textContent >= compScore.textContent) {
             winnerText.textContent += ` ${userName.textContent}`
             winnerText.style.display = 'block'
-        } else{
+        } else {
             winnerText.textContent += " Computer"
             winnerText.style.display = 'block'
 
@@ -110,7 +117,7 @@ function playGame(value) {
     const computerChoice = getComputerChoice()
     const userValue = gameLogic(value, computerChoice)
     scoreAdder(userValue)
-    
+
 }
 
 
